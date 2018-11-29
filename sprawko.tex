@@ -1,0 +1,112 @@
+\documentclass{classrep}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{graphicx}
+
+\DeclareUnicodeCharacter{00A0}{~}
+
+\studycycle{Informatyka, studia dzienne, inż I st.}
+\coursesemester{V}
+
+\coursename{Sztuczna inteligencja i systemy ekspertowe}
+\courseyear{2018/2019}
+
+\courseteacher{dr inż. Krzysztof Lichy}
+\coursegroup{piątek, 9:30}
+
+\author{
+  \studentinfo{Marek Maras}{210267} \and
+  \studentinfo{Krzysztof Pilcicki}{210291}
+}
+
+\title{Zadanie 1: Piętnastka}
+
+\begin{document}
+\maketitle
+
+\section{Cel}
+
+Zadanie składa się z dwóch części: programistycznej i badawczej.
+Celem części programistycznej jest napisanie programu, który będzie rozwiązywał tzw. "Piętnastkę" przy użyciu różnych metod przeszukiwania przestrzeni stanów:
+strategii "wszerz";
+strategii "w głąb";
+strategii "najpierw najlepszy": A*;
+z następującymi heurystykami:
+metryką Hamminga;
+metryką Manhattan.
+Cel części badawczej stanowi przebadanie, jak powyższe metody przeszukiwania przestrzeni stanów zachowują się w przypadku tego problemu.
+
+\section{Wprowadzenie}
+
+Zaimplementowane przez nas różne metody przeszukiwania przestrzeni stanów, polegają na rozwijaniu struktury drzewa stanów w celu odnalezienia stanu końcowego, czyli stanu reprezentującego rozwiązaną układankę. Sekwencja kroków/ruchów, która doprowadziła do stanu końcowego jest rozwiązaniem łamigłówki. Drzewo stanów jest sukcesywnie rozwijane w oparciu o możliwe ruchy w aktualnie wizytowanym stanie (pomijając bezużyteczne ruchy np. lewo - prawo). Metody przeszukiwania drzewa stanów decydują o kolejności odwiedzania kolejnych stanów w drzewie.
+\newpage
+Na potrzeby zadania zaimplementowano następujące metody przeszukiwania przestrzeni stanów:
+
+\begin{enumerate}
+    \item przeszukiwania wszerz (ang. BFS):
+             algorytm ten polega na tym, że przed przejściem na następny stopień głębokości drzewa stanów, sprawdzany jest każdy stan na danym poziomie.
+             \vspace{1ex}
+    \item przeszukiwanie wgłąb (ang. DFS):
+    \vspace{1ex}
+    \item najpierw najlepszy (algorytm A*) -
+        \newlineUżyto następujących heurystyk:  
+        \begin{enumerate}
+            \item Metryka Hamminga - metryka polegająca na obliczeniu sumy elementów układanki będących na nieprawidłowym miejscu
+            \item Metryka Manhattan - metryka polegająca na obliczeniu minimalnej sumy poziomych i pionowych  przesunięć dla każdego elementu układanki, tak aby dany element znalazł się na prawidłowym miejscu    
+        \end{enumerate}
+\end{enumerate}
+
+
+\section{Opis implementacji}
+\subsection{Opis implementacji}
+W celu przechowywania danych (aktualnego stanu układanki, sekwencji dotychczasowych ruchów) oraz udostępnienia operacji (pobrania możliwych ruchów, wykonaniu ruchu, sprawdzenia, czy dany stan jest stanem końcowym) stworzono klasę PuzzleState reprezentującą stan w przestrzeni stanów.  
+Na potrzeby implementacji różnych metod przeszukiwań stworzono również abstrakcyjną klasę bazową BaseAlgorithm zawierającą metodę szablonową (wykorzystano wzorzec projektowy Template Pattern), definiującą sekwencję operacji, których implementacja dostarczana jest przez klasy dziedziczące tzn. Bfs/Dfs/AstarAlgorithm. Dodatkowo na potrzeby wprowadzenia funkcji heurystyki do algorytmu A* zdefiniowano interfejs IHeuristic oraz implementujące go klasy: Hamming/ManhattanHeuristic.            
+
+\centering
+\subsection{Diagram UML}
+
+\leftskip-2em\includegraphics[scale=0.4]{UML-SISE.png}
+
+
+\leftskip0em\section{Materiały i metody}
+Żeby 
+
+\section{Wyniki}
+{\color{blue}
+W tej sekcji należy zaprezentować, dla każdego przeprowadzonego eksperymentu,
+kompletny zestaw wyników w postaci tabel, wykresów (preferowane) itp. Powinny
+być one tak ponazywane, aby było wiadomo, do czego się odnoszą. Wszystkie
+tabele i wykresy należy oczywiście opisać (opisać co jest na osiach, w
+kolumnach itd.) stosując się do przyjętych wcześniej oznaczeń. Nie należy tu
+komentować i interpretować wyników, gdyż miejsce na to jest w kolejnej sekcji.
+Tu również dobrze jest wprowadzić oznaczenia (tabel, wykresów), aby móc się do
+nich odwoływać poniżej.}
+
+\section{Dyskusja}
+{\color{blue}
+Sekcja ta powinna zawierać dokładną interpretację uzyskanych wyników
+eksperymentów wraz ze szczegółowymi wnioskami z nich płynącymi. Najcenniejsze
+są, rzecz jasna, wnioski o charakterze uniwersalnym, które mogą być istotne
+przy innych, podobnych zadaniach. Należy również omówić i wyjaśnić wszystkie
+napotkane problemy (jeśli takie były). Każdy wniosek powinien mieć poparcie we
+wcześniej przeprowadzonych eksperymentach (odwołania do konkretnych wyników).
+Jest to jedna z najważniejszych sekcji tego sprawozdania, gdyż prezentuje
+poziom zrozumienia badanego problemu.}
+
+\section{Wnioski}
+{\color{blue}
+W tej, przedostatniej, sekcji należy zamieścić podsumowanie najważniejszych
+wniosków z sekcji poprzedniej. Najlepiej jest je po prostu wypunktować. Znów,
+tak jak poprzednio, najistotniejsze są wnioski o charakterze uniwersalnym.}
+
+\begin{thebibliography}{0}
+  \bibitem{l2short} T. Oetiker, H. Partl, I. Hyna, E. Schlegl.
+    \textsl{Nie za krótkie wprowadzenie do systemu \LaTeX2e}, 2007, dostępny
+    online.
+\end{thebibliography}
+
+{\color{blue}
+Na końcu należy obowiązkowo podać cytowaną w sprawozdaniu literaturę, z której
+grupa korzystała w trakcie prac nad zadaniem.}
+
+\end{document}
